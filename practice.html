@@ -1,0 +1,150 @@
+
+
+
+var products;
+fetch('https://reqres.in/api/products')
+    .then(response => response.json())
+    .then(json => {
+        products = json.data;
+        // console.log(products)
+        var elem = products.map((value, index) => {
+            return (
+                `
+     <tr>
+       <td>${value.name}</td>
+       <td>${value.year}</td>
+       <td>${value.color}</td>
+       <td>${value.pantone_value}</td>
+       </tr>
+       `
+            )
+
+        });
+        var optins = products.map((value, index) => {
+            return (
+                `
+                <option>${value.name}</option>
+                `
+            )
+
+        });
+
+        var optins1 = products.map((value, index) => {
+            return (
+                `<option>${value.year}</option>
+                `
+            )
+
+        });
+        var optins2 = products.map((value, index) => {
+            return (
+                `<option>${value.color}</option>
+                `
+            )
+
+        });
+
+        document.getElementById('ele').innerHTML = optins;
+        document.getElementById('elem').innerHTML=optins1;
+        document.getElementById('eleme').innerHTML=optins2;
+        document.getElementById('gun').innerHTML = elem;
+    })
+document.getElementById('search-value').addEventListener("keyup",function(value){
+   const search= console.log(document.getElementById('search-value').value);
+ var gna=products.filter((value)=>{
+     return value.name.indexOf(search)>-1;
+
+ })
+ console.log(gna)
+});
+
+
+
+
+
+
+var products;
+fetch('https://reqres.in/api/users')
+    .then(response => response.json())
+    .then(json => {
+        products = json.data;
+        console.log(products)
+
+        loopdata(products);
+
+
+    })
+    document.getElementById('search-value').addEventListener('keyup', function (value) {
+    const search = document.getElementById('search-value').value;
+    var gnaa = products.filter((value) => {
+        return value.first_name.toLowerCase().indexOf(search) > -1 ||   value.last_name.toLowerCase().indexOf(search) > -1 
+    })
+    console.log(gnaa);
+    loopdata(gnaa);
+
+    if(  gnaa.length===0){
+        document.getElementById('nodata').style.display="block";
+          }
+        else{
+            document.getElementById('nodata').style.display="none";
+        }
+
+
+});
+
+
+function loopdata(data){
+    var elem = data.map((value, index) => {
+        return (
+            `
+ <tr>
+   <td>
+   ${value.email}</td>
+   <td>${value.first_name}</td>
+   <td>${value.last_name}</td>
+   <td><img src=${value.avatar} /></td>
+   </tr>`
+        )
+
+    });
+    document.getElementById('gun').innerHTML = elem;
+
+
+}
+
+document.getElementById('nodata').style.display="none";
+
+
+
+
+
+
+
+
+
+
+
+<select id="ele" class="text"></select>
+<select id="elem" class="text1"></select>
+<select id="eleme" class="text1"></select>
+
+<input type="text" id="search-value" placeholder="Search..">
+<h3 id="nodata">no result found</h3>
+    
+  
+
+<table class="table table-borderd">
+  
+
+    <tr>
+        <th>email</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>avatar</th>
+    </tr>
+
+
+    <tbody id="gun">
+       
+    </tbody>
+</table>
